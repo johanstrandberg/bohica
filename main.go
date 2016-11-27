@@ -3,7 +3,8 @@ package main
 import (
 	"fmt"
 	"log"
-
+    "bohica/graphics"
+    "bohica/scene"
 	"github.com/go-gl/gl/v3.2-compatibility/gl"
 	"github.com/go-gl/glfw/v3.2/glfw"
 )
@@ -17,19 +18,25 @@ func main() {
 		panic(err)
 	}
 
+    menu := scene.MenuScene{"Header title"}
+
+    fmt.Println(menu.Title)
+
 	window.MakeContextCurrent()
-	fmt.Println(glfw.VulkanSupported())
-	fmt.Println(glfw.GetVersion())
 	if err := gl.Init(); err != nil {
 		log.Fatalln("failed to initialize gl bindings:", err)
 	}
 
 	version := gl.GoStr(gl.GetString(gl.VERSION))
 	fmt.Println("OpenGL version", version)
-	for !window.ShouldClose() {
-		gl.ClearColor(0.0, 1.0, 0.0, 0.0)
-		gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
+	
+    for !window.ShouldClose() {
+        graphics.Draw()
 		window.SwapBuffers()
 		glfw.PollEvents()
 	}
+}
+
+func init() {
+
 }
