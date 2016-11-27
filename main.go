@@ -32,6 +32,7 @@ func main() {
 	
     for !window.ShouldClose() {
         graphics.Draw()
+        
 		window.SwapBuffers()
 		glfw.PollEvents()
 	}
